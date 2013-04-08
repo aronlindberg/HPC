@@ -1,0 +1,47 @@
+Logon to the node using:
+
+ssh -Y username@arc-login.case.edu
+
+Reserve a node using any of these:
+
+qsub -I -X -l nodes=1:ppn=12,mem=23gb (12 processors, 1 node, 23 GB)
+qsub -I -X -l nodes=1:ppn=12,mem=47gb -q himem  (12 processors, 1 node, 47 GB)
+qsub -I -X -l nodes=1:ppn=32,mem=200gb (32 processors, 1 node, 200GB)
+
+or
+
+qsub -I -X -l nodes=1:ppn=1,mem=200gb
+
+then
+
+module load R
+R
+
+
+
+#######################
+
+i) create a file, call it myjob.pbs, and
+ii) sandwich the code between the following header, and footer:
+
+#PBS -l nodes=1:ppn=12,mem=23gb
+#PBS -N your_job_name
+#PBS -j oe 
+
+cp * $PFSDIR
+cd $PBS_O_WORKDIR
+
+
+Your R code goes HERE!!
+
+cp * $PBS_O_WORKDIR
+
+Greek and latin? Please find details on what they mean here
+
+iii) Save the above file, and use qsub <filename> for ex: qsub myfile.pbs
+
+iv) You would get a job ID like number.mast which means your job is submitted...
+
+v) To see the status of the job, use qstat -f <number>  for ex.:  qstat -f 1227272
+
+vi) If you wish to see the partial output on the fly, use qpeek <number>  for ex.: qpeek 129292
