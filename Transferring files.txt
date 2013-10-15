@@ -1,0 +1,2 @@
+scp  ~/github/local/github-activities/R/full_dataset_crunching.R  axl340@arc-login.case.edu:/home/axl340/pst_crunching/
+
